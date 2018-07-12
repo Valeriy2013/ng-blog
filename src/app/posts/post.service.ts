@@ -25,8 +25,25 @@ export class PostService {
   }
 
   getPostData(id: string) {
-    this.postDoc = this.afs.doc<Post>(`post/${id}`)
+    this.postDoc = this.afs.doc<Post>(`posts/${id}`)
     return this.postDoc.valueChanges()
   }
+
+  getPost(id: string) {
+    return this.afs.doc<Post>(`posts/${id}`)
+  }
+
+  create(data: Post) {
+    this.postsCollection.add(data)
+  }
+
+  update(id: string, formData) {
+    return this.getPost(id).update(formData)
+  }
+
+  delete(id: string) {
+    return this.getPost(id).delete()
+  }
+
 }
 
