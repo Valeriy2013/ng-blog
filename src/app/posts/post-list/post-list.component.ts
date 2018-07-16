@@ -23,6 +23,6 @@ export class PostListComponent implements OnInit {
 
   delete(id: string) {
     this, this.postService.delete(id)
-    this.toastr.success('Post was deleted!', 'Success', { timeOut: 1500 })
+    this.toastr.success('Post was deleted!', 'Success', { timeOut: 1500, positionClass: 'toast-top-center' })
   }
 }

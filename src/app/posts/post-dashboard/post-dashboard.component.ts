@@ -49,7 +49,7 @@ export class PostDashboardComponent implements OnInit {
     this.title = '';
     this.content = '';
     this.buttonText = 'Post Created!';
-    this.toastr.success('Post was created!', 'Success', { timeOut: 1500 });
+    this.toastr.success('Post was created!', 'Success', { timeOut: 1500, positionClass: 'toast-top-center' });
     setTimeout(() => (this.buttonText = "Create Post"), 3000);
   }
 

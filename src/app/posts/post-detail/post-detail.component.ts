@@ -40,7 +40,7 @@ export class PostDetailComponent implements OnInit {
     }
     const id = this.route.snapshot.paramMap.get('id');
     this, this.postService.update(id, formData);
-    this.toastr.success('Post was updated!', 'Success', { timeOut: 1500 });
+    this.toastr.success('Post was updated!', 'Success', { timeOut: 1500, positionClass: 'toast-top-center' });
     this.editing = false;
   }
 
