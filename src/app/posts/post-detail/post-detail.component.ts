@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { PostService } from '../post.service';
 import { Post } from '../post';
 import { AuthService } from '../../core/auth.service';
+import { ToastrService } from '../../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-post-detail',
@@ -18,7 +19,8 @@ export class PostDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    public auth: AuthService
+    public auth: AuthService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class PostDetailComponent implements OnInit {
     }
     const id = this.route.snapshot.paramMap.get('id');
     this, this.postService.update(id, formData);
+    this.toastr.success('Post was updated!', 'Success', { timeOut: 1500 });
     this.editing = false;
   }
 

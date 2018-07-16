@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 //import { finalize } from 'rxjs/operators';
 import { finalize } from '../../../../node_modules/rxjs/internal/operators/finalize';
+import { ToastrService } from '../../../../node_modules/ngx-toastr';
 
 
 
@@ -27,7 +28,9 @@ export class PostDashboardComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private postService: PostService,
-    private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
   }
@@ -46,13 +49,14 @@ export class PostDashboardComponent implements OnInit {
     this.title = '';
     this.content = '';
     this.buttonText = 'Post Created!';
+    this.toastr.success('Post was created!', 'Success', { timeOut: 1500 });
     setTimeout(() => (this.buttonText = "Create Post"), 3000);
   }
 
   uploadImage(event) {
     const file = event.target.files[0]
     const path = `posts/${file.name}`
-    
+
     if (file.type.split('/')[0] !== 'image') {
       return alert('only image files')
     } else {
@@ -66,7 +70,7 @@ export class PostDashboardComponent implements OnInit {
           this.downloadURL.subscribe(url => (this.image = url));
         })
       )
-      .subscribe();
+        .subscribe();
     }
   }
 }
