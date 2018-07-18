@@ -3,11 +3,9 @@ import { AuthService } from '../../core/auth.service';
 import { PostService } from '../post.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
-//import { finalize } from 'rxjs/operators';
 import { finalize } from '../../../../node_modules/rxjs/internal/operators/finalize';
 import { ToastrService } from '../../../../node_modules/ngx-toastr';
-
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-dashboard',
@@ -29,7 +27,8 @@ export class PostDashboardComponent implements OnInit {
     private auth: AuthService,
     private postService: PostService,
     private storage: AngularFireStorage,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -51,6 +50,7 @@ export class PostDashboardComponent implements OnInit {
     this.buttonText = 'Post Created!';
     this.toastr.success('Post was created!', 'Success', { timeOut: 1500, positionClass: 'toast-top-center' });
     setTimeout(() => (this.buttonText = "Create Post"), 3000);
+    this.router.navigate(["/blog"]);
   }
 
   uploadImage(event) {
